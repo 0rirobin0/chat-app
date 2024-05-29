@@ -13,7 +13,17 @@ function notFoundhandler(req,res,next)
  
 function errorhandler(err,req,res,next) {
 
-    res.render('error');
+   res.locals.error=
+   process.env.NODE_ENV === 'Development' ? err :{ message :err.message};
+
+   res.status(err.status || 500);
+   if(!res.locals.html)
+    {
+        res.render("error",{
+            title:"Error page",
+        })
+    }
+    else res.json(res.locals.error);
     
 }
 

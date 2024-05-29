@@ -6,7 +6,9 @@ const path = require('path');
 const cookieparser = require('cookie-parser');
 
 // Internal imports
-const {errorhandler,notFoundhandler}= require('./middleware/common/errorhandler');
+const {errorhandler,notFoundhandler} = require('./middleware/common/errorhandler');
+const loginrouter = require('./router/loginrouter');
+const inboxrouter =require('./router/inboxrouter');
 
 
 
@@ -38,7 +40,18 @@ app.use(express.static(path.join(__dirname ,'./public/')));
 
 app.use(cookieparser(process.env.COOKIE_SECRET));
 
+
+
+
 // ROUTE HANDLER
+ app.use('/',loginrouter);
+ app.use('/inbox',inboxrouter);
+//  app.use('/user',userrouter);
+
+
+
+
+
 
 app.get('/',(req,res)=>
 {
