@@ -9,7 +9,7 @@ const cookieparser = require('cookie-parser');
 const {errorhandler,notFoundhandler} = require('./middleware/common/errorhandler');
 const loginrouter = require('./router/loginrouter');
 const inboxrouter =require('./router/inboxrouter');
-
+const userrouter =require('./router/userrouter');
 
 
 
@@ -44,25 +44,17 @@ app.use(cookieparser(process.env.COOKIE_SECRET));
 
 
 // ROUTE HANDLER
+
+
  app.use('/',loginrouter);
  app.use('/inbox',inboxrouter);
-//  app.use('/user',userrouter);
+ app.use('/users',userrouter);
 
 
 
 
 
 
-app.get('/',(req,res)=>
-{
-   
-   
-    res.status(200).send('Hello Robin');
-
-
-
-
-})
 
 // ERROR HANDLER
 
